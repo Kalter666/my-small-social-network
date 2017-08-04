@@ -1,0 +1,39 @@
+include ../basic/head
+    link(href="/css/dialog.css" rel="stylesheet")
+    title My dialogs | social network
+body
+    include ../basic/navbar
+    div.jumbotron
+        div.container
+            div.row
+                //
+                    Start menu
+                div.col-xs-2.left
+                    include ../basic/main-menu
+                //
+                    end menu
+                //
+                    Start message
+                div.row
+                    div.col-xs-9
+                        h1.h1.text-center My dialogs
+                        div.container
+                            if dialogs
+                                each dialog in dialogs
+                                    div.container-message
+                                        if dialog.from_username == user.username
+                                            a(href="/message/" + dialog.to_username)
+                                                div.dialog-holder.from_me
+                                                    div.text-center= dialog.from_username
+                                                    pre= dialog.text
+                                                    div.text-center
+                                                        small= dialog.create
+                                        else
+                                            a(href="/message/" + dialog.from_username)
+                                                div.dialog-holder.from_user
+                                                    div.text-center= dialog.from_username
+                                                    pre= dialog.text
+                                                    div.text-center
+                                                        small= dialog.create
+                            else
+                                h2.h2.text-center.text-danger You have no dialogs, send a message someone

@@ -1,1 +1,1 @@
-my-small-social-network
+To run this you need MySQL 5.2, Node.js 7.4 and above.

@@ -1,0 +1,54 @@
+include ../basic/head
+    title Search users | Social Network
+body
+    include ../basic/navbar
+    div.jumbotron
+        div.container
+            div.row
+                //
+                    Start menu
+                div.col-xs-2.left
+                    include ../basic/main-menu
+                //end menu
+                div.row
+                    div.col-xs-9
+                        //search form
+                        div.container(style="padding-top: 20px")
+                            form(method="post" action="/search/user")
+                                div.form-group
+                                    input.form-control(type="text" placeholder="Find someone..." name="name")#usersearch
+                                div.text-center
+                                    button(type="submit")#search.btn.btn-success
+                                        span.glyphicon.glyphicon-search
+                                        span Search
+                        div.container
+                            if users
+                                table.table.table-condensed
+                                    thead
+                                        tr
+                                            th Username
+                                            th First name
+                                            th Last name
+                                            th E-mail
+                                            th Website
+                                            th Register
+                                    tbody
+                                    each usr in users
+                                        tr
+                                            td
+                                                a(href="/profile/" + usr.username)= usr.username
+                                            td
+                                                if usr.last_name
+                                                    span= usr.name
+                                            td
+                                                if usr.last_name
+                                                    span= usr.last_name
+                                            td
+                                                if usr.e_mail
+                                                    span= usr.e_mail
+                                            td
+                                                if usr.website
+                                                    span= usr.website
+                                            td
+                                                if usr.create
+                                                    span= usr.create

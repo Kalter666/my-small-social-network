@@ -1,0 +1,92 @@
+include ../basic/head
+    title= im.username + ' | social network'
+body
+    include ../basic/navbar
+    div.jumbotron
+        div.container
+            div.row
+                //
+                    Start menu
+                div.col-xs-2.left
+                    include ../basic/main-menu
+                //
+                    end menu
+                //
+                    Start profile
+                div.row
+                    div.col-xs-3.text-center
+                        img.img-thumbnail(alt="200x200", src=im.pic, style="width: 200px; height: 200px;")
+                        div.btn-group-vertical
+                            if !you
+                                a.btn.btn-primary(href="/message/"+ im.username, style="width: 200px;")
+                                    span.glyphicon.glyphicon-envelope
+                                    span= "  Message"
+                                if !friend
+                                    form(method="post" action="/addfriend/" + im.username)
+                                        button.btn.btn-success(type="submit" style="width: 200px;") Add favorite
+                                else
+                                    form(method="post" action="/deletefriend/" + im.username)
+                                        button.btn.btn-danger(type="submit" style="width: 200px;") Delete favorite
+                            if errorMessage
+                                span.h3.text-danger= errorMessage
+                    //user info
+                    div.col-xs-6
+                        div.container
+                            //Setting up user names
+                            if user.name && user.last_name
+                                h2.h2.text-center.text-capitalize(style="border-bottom: 1px solid gray;")= im.name + ' ' + im.last_name
+                            else if user.name
+                                h2.h2.text-center.text-capitalize(style="border-bottom: 1px solid gray;")= im.name
+                            else if user.last_name
+                                h2.h2.text-center.text-capitalize(style="border-bottom: 1px solid gray;")= im.last_name
+                            else
+                                h2.h2.text-center.text-capitalize(style="border-bottom: 1px solid gray;")= im.username
+                            //set up user credentials
+                            h3.h3.text-info.text-capitalize.text-center user credentials
+                            if im.e_mail
+                                div.container(style="border-bottom: 1px solid gray; padding-top: 20px;")
+                                    span.text-capitalize E-mail:
+                                    a.btn-link.text-capitalize(href="mailto:" + im.e_mail)= " " + im.e_mail
+                            if im.website
+                                div.container(style="border-bottom: 1px solid gray; padding-top: 10px;")
+                                    span.text-capitalize website:
+                                    a.btn-link.text-capitalize(href=im.website)= " " + im.website
+                            if im.create
+                                div.container(style="border-bottom: 1px solid gray; padding-top: 10px;")
+                                    span.text-capitalize create:
+                                    span.text-capitalize= " " + im.create
+                            //users activity
+                                favorite users badge
+                            div.row
+                                div.col-xs-3.text-center
+                                    div.panel.panel-info
+                                        a(href="/favorite/users/" + im.username)
+                                            div.panel-heading
+                                                ins
+                                                    h3.panel-title Favorite users
+                                            div.panel-body= friends
+                                //addings to favorite
+                                div.col-xs-3.text-center
+                                    div.panel.panel-info
+                                        a(href="/favorite/addings/users/" + im.username)
+                                            div.panel-heading
+                                                ins
+                                                    h3.panel-title Addings to favorite
+                                            div.panel-body= friendAddings
+                            if articles
+                                h3.text-center
+                                    //user articles
+                                    span.glyphicon.glyphicon-list
+                                    span.h3.text-primary    Articles
+                                    span.glyphicon.glyphicon-menu-down
+                                ul.list-group.text-center
+                                    each article in articles
+                                        li.list-group-item
+                                            a.navbar-link(href="/article/" + article.id)= article.name
+                                                br
+                                                span= 'create: ' + article.create
+                            else
+                                if you
+                                    span.h3.text-center.text-warning There is no articles! Try to add some.
+//script(src="/vendor/js/jquery.min.js")
+//script(src="/vendor/js/bootstrap.min.js")

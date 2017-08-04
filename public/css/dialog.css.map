@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,kBAAkB,CAChB,WAAW,CAAE,GAAG,CAChB,UAAU,CAAE,cAAc,CAC5B,UAAU,CACR,gBAAgB,CAAE,OAAO,CAC3B,QAAQ,CACN,gBAAgB,CAAE,OAAO",
+"sources": ["dialog.sass"],
+"names": [],
+"file": "dialog.css"
+}

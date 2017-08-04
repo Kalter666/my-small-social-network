@@ -1,0 +1,24 @@
+include basic/head
+    title main | Social Network
+body
+    div.container
+        div.col-xs-4.col-xs-offset-4
+            if user
+                a.btn-link(href="/profile/" + user.username)
+                    // / + user.id
+                    h2.text-center.h2 Your Profile
+            else
+                a.btn-link(href="/login")
+                    h2.text-center.h2 Log in
+                br
+                a.btn-link(href="/signup")
+                    h2.text-center.h2 Sign up
+            if users
+                h1.h1.text-primary.text-center Users
+                ul.list-group.text-center
+                    each userV in users
+                        li.list-group-item-text
+                            a(href="/profile/" + userV.username)= userV.username
+//script(src="/vendor/js/jquery.min.js")
+//script(src="/vendor/js/bootstrap.min.js")
+
